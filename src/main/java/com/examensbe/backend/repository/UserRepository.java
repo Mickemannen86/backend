@@ -11,7 +11,7 @@ import java.util.UUID;
 @Repository
 
  */
-public interface IRepository {
+public interface UserRepository {
 
 
 }

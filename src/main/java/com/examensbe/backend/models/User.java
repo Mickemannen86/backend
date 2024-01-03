@@ -7,23 +7,23 @@ import java.util.UUID;
 public class User {
 
 
-    private UUID id;
+    private Long id;
 
     private String username;
 
     private String password;
 
-    public User(UUID id) {
+    public User(Long id) {
         this.id = id;
     }
 
     public User() {}
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
