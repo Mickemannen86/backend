@@ -7,7 +7,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-//
 @Entity
 @Table(name = "users")
 public class UserEntity implements UserDetails {
