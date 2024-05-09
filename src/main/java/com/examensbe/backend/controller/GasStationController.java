@@ -1,10 +1,10 @@
 package com.examensbe.backend.controller;
 
 
+import com.examensbe.backend.models.gasStation.GasStation;
 import com.examensbe.backend.models.user.LocationRequest;
-import com.examensbe.backend.models.geoCodeReverse.Geometry;
-
 import com.examensbe.backend.services.GasStationService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,13 +31,16 @@ public class GasStationController {
     @PostMapping("/coordinateData") // localhost:3000/location/coordinateData
     public ResponseEntity<?> getGasStations(@RequestBody LocationRequest locationRequest) throws IOException {
         // Call the service method to process the location data
-        Geometry response = gasStationService.processLocation(locationRequest.latitude(), locationRequest.longitude());
+        GasStation response = gasStationService.processLocation(locationRequest.latitude(), locationRequest.longitude());
 
-        // Skriv ut sparad Location
-        System.out.println("Lat: " + response.getLocation().getLat() +
-                "\nLong: " + response.getLocation().getLng());
+        System.out.println("\nInnehåller svaret i GasStationController något?" + response + "? <-------------\n");
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        // Gör en check för att se om response är null
+        if (response != null) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            // Om ingen bensinstation hittades, returnera ett felmeddelande
+            return new ResponseEntity<>("No gas station found.", HttpStatus.NOT_FOUND);
+        }
     }
-
 }

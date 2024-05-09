@@ -60,9 +60,9 @@ public class AuthenticationController {
                         "\nAuthorities: " + authentication.getAuthorities() +
                         "\nCredentials: " + authentication.getCredentials() +
                         "\nDetails: " + authentication.getDetails() +
-                        "\nPrincipal " + authentication.getPrincipal() +
-                        "\nAuthentication: " + authentication
+                        "\nAuthentication: " + authentication + "\n"
         );
+
         // Generate JWT token using the authenticated Authentication object
         String token = jwtTokenGenerator.generateToken(authentication);
 

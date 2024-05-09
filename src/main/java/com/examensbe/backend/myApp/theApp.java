@@ -81,16 +81,6 @@ public class theApp {
         }
     }
 
-    // Method to extract address from geocoding result
-    public String extractAddress(String geocodingResult) {
-
-        // ta ut adress värde Tyresö/Bollmora
-
-        // Your implementation to extract address from geocoding result
-        // Use Jackson ObjectMapper to parse JSON response
-        return null;
-    }
-
     // Method to query fakeStations.json for list of gas stations
     public List<GasStation> queryGasStations(String postal_town) throws IOException {
 
@@ -117,7 +107,7 @@ public class theApp {
 
     // Method to select gas station with the lowest price
 
-    public String selectGasStationWithLowestPrice(List<GasStation> gasStations) throws IOException {
+    public GasStation selectGasStationWithLowestPrice(List<GasStation> gasStations) throws IOException {
         // Find the gas station with the lowest price
         Optional<GasStation> cheapestGasStation = gasStations.stream()
                 .min(Comparator.comparingDouble(station -> parsePrice(station.getPrice())));
@@ -125,7 +115,8 @@ public class theApp {
         // If a cheapest gas station is found, return its details
         if (cheapestGasStation.isPresent()) {
             GasStation cheapestStation = cheapestGasStation.get();
-            return "\n-- Cheapest Gas Station --" +
+            return cheapestStation;
+            /*return "\n-- Cheapest Gas Station --" +
                     "\nGas Station: " + cheapestStation.getGasStation() +
                     "\nFuel: " + cheapestStation.getFuel() +
                     "\nPrice: " + cheapestStation.getPrice() +
@@ -135,9 +126,12 @@ public class theApp {
                     "\nPostal Town: " + cheapestStation.getPostalTown() +
                     "\nSublocality: " + cheapestStation.getSublocality() +
                     "\n--------------------------";
+
+             */
         } else {
             // If no gas station is found, return a message indicating so
-            return "No gas station found.";
+            System.out.println("No gas station found.");
+            return null;
         }
     }
 
@@ -148,7 +142,7 @@ public class theApp {
     }
 
     // Method to process latitude and longitude
-    public void processLatitudeLongitude(double latitude, double longitude) throws IOException {
+    public GasStation processLatitudeLongitude(double latitude, double longitude) throws IOException {
         // Anropar fetchLatLong för att hantera latitud och longitud från frontend.
         fetchLatLong(latitude, longitude); // Få notis om att lat lng nått theApp från frontend
 
@@ -162,9 +156,10 @@ public class theApp {
         List<GasStation> gasStations = queryGasStations(postalTownResult);
 
         // Väljer den bensinstationen med lägsta priset från resultatet med selectGasStationWithLowestPrice.
-        String selectedGasStation = selectGasStationWithLowestPrice(gasStations);
+        GasStation selectedGasStation = selectGasStationWithLowestPrice(gasStations);
         // Return selected gas station data to the controller or further process it
         System.out.println("Slutresultat Check: " + selectedGasStation);
+        return selectedGasStation;
     }
 
     // Hämta lat long object (frontend)                                                                                 -- 1.) klart!
