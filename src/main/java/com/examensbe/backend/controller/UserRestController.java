@@ -28,31 +28,6 @@ public class UserRestController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("/myPerms")
-    public ResponseEntity<String> viewPermissions() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        // Get the principal (authenticated user)
-        Object principal = authentication.getPrincipal();
-
-        if (principal instanceof UserDetails) {
-            // If the principal is a UserDetails object (which it should be), you can cast it
-            UserDetails userDetails = (UserDetails) principal;
-            String username = userDetails.getUsername();
-            String authorities = userDetails.getAuthorities().toString();
-
-            // Now you have the username of the currently logged-in user
-            System.out.println("Currently logged-in user: " + username + authorities);
-        } else {
-            // Handle the case where the principal is not a UserDetails object
-            System.out.println("Unable to determine the currently logged-in user");
-        }
-
-        // Your method logic...
-
-        return new ResponseEntity<>("Check log", HttpStatus.ACCEPTED);
-    }
-
     @PostMapping("/user") // http://localhost:8080/api/user funkar om allt i body fylls i!
     public ResponseEntity<UserEntity> createNewUser(@RequestBody UserEntity newUser) {
 
@@ -68,42 +43,6 @@ public class UserRestController {
 
         return new ResponseEntity<>(userRepository.save(userEntity), HttpStatus.CREATED);
     }
-
-
-    @GetMapping("/hash")
-    public ResponseEntity<String> testBcryptHash(
-            @RequestParam(defaultValue = "", required = false) String continueParam,
-            @RequestParam(defaultValue = "", required = false) String inputPassword
-    ) {
-
-        return new ResponseEntity<>(
-                appPasswordConfig.bCryptPasswordEncoder().encode(inputPassword),
-                HttpStatus.ACCEPTED
-        );
-    }
-
-    @GetMapping("/helloAdmin")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<String> sayHelloToAdmin() {
-
-        return new ResponseEntity<>("Hello ADMIN!", HttpStatus.ACCEPTED);
-    }
-
-    @GetMapping("/helloUser")
-    @PreAuthorize("hasRole('ROLE_USER')")
-    public ResponseEntity<String> sayHelloToUser() {
-
-        return new ResponseEntity<>("Hello USER!", HttpStatus.ACCEPTED);
-    }
-
-    @GetMapping("/sayGet")
-    @PreAuthorize("hasAuthority('GET')")
-    public ResponseEntity<String> checkGetAuthority() {
-
-        return new ResponseEntity<>("You can only enter with GET Authority!", HttpStatus.ACCEPTED);
-    }
-
-
 
 }
 
