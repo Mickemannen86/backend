@@ -1,0 +1,42 @@
+[
+  {
+    "gasStation":"St1",
+    "fuel":"95 Blyfri",
+    "price":"18,64 kr",
+    "address":"Industrivägen",
+    "streetNr":6,
+    "postalCode":13540,
+    "postalTown":"Tyresö",
+    "sublocality":"Bollmora"
+  },
+  {
+    "gasStation":"Okq8",
+    "fuel":"95 Blyfri",
+    "price":"18,49 kr",
+    "address":"Siklöjevägen",
+    "streetNr":3,
+    "postalCode":13531,
+    "postalTown":"Tyresö",
+    "sublocality":"Bollmora"
+  },
+  {
+    "gasStation":"CircleK",
+    "fuel":"95 Blyfri",
+    "price":"18,49 kr",
+    "address":"Björkbacksvägen",
+    "streetNr":12,
+    "postalCode":13540,
+    "postalTown":"Tyresö",
+    "sublocality":"Bollmora"
+  },
+  {
+    "gasStation":"Shell",
+    "fuel":"95 Blyfri",
+    "price":"18,89 kr",
+    "address":"Hägerstensvägen",
+    "streetNr":93,
+    "postalCode":12649,
+    "postalTown":"Hägersten",
+    "sublocality":"Hägersten"
+  }
+]
