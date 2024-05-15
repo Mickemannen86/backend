@@ -20,11 +20,12 @@ import java.util.stream.Collectors;
 public class theApp {
 
     @Value("${GeoCodeKey}")
-    private String YOUR_API_KEY;
+    private final String YOUR_API_KEY;
 
     private final ObjectMapper objectMapper;
 
-    public theApp(ObjectMapper objectMapper) {
+    public theApp(@Value("${GeoCodeKey}") String apiKey, ObjectMapper objectMapper) {
+        this.YOUR_API_KEY= apiKey;
         this.objectMapper=objectMapper;
     }
 

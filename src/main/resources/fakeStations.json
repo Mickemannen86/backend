@@ -38,5 +38,45 @@
     "postalCode":12649,
     "postalTown":"Hägersten",
     "sublocality":"Hägersten"
+  },
+  {
+    "gasStation":"Prem",
+    "fuel":"95 Blyfri",
+    "price":"18.84 kr",
+    "address":"Flemingsbergsleden",
+    "streetNr":1,
+    "postalCode":14156,
+    "postalTown":"Huddinge",
+    "sublocality":"Huddinge"
+  },
+  {
+    "gasStation":"Shell",
+    "fuel":"95 Blyfri",
+    "price":"19.04 kr",
+    "address":"Kommunalvägen",
+    "streetNr":7,
+    "postalCode":14161,
+    "postalTown":"Huddinge",
+    "sublocality":"Huddinge"
+  },
+  {
+    "gasStation":"INGO",
+    "fuel":"95 Blyfri",
+    "price":"19.04 kr",
+    "address":"Köpmanvägen",
+    "streetNr":1,
+    "postalCode":19730,
+    "postalTown":"Bro",
+    "sublocality":"Bro"
+  },
+  {
+    "gasStation":"Sti1",
+    "fuel":"95 Blyfri",
+    "price":"19.04 kr",
+    "address":"Energivägen",
+    "streetNr":1,
+    "postalCode":19637,
+    "postalTown":"Kungsängen",
+    "sublocality":"Kungsängen"
   }
 ]
