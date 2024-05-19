@@ -3,6 +3,7 @@ package com.examensbe.backend.services;
 import com.examensbe.backend.Jwt.JwtAuthenticationRequest;
 import com.examensbe.backend.Jwt.JwtAuthenticationResponse;
 import com.examensbe.backend.config.AppPasswordConfig;
+import com.examensbe.backend.exceptions.UserAlreadyExistException;
 import com.examensbe.backend.models.user.RegisterRequest;
 import com.examensbe.backend.models.user.Roles;
 import com.examensbe.backend.models.user.UserEntity;
@@ -25,11 +26,15 @@ public class AuthenticationService {
 
     public UserEntity register(RegisterRequest request) {
 
+        if (userRepository.existsByUsername(request.username())) {
+            throw new UserAlreadyExistException();
+        }
+
         UserEntity newUser = new UserEntity();
 
         newUser.setUsername(request.username());
         newUser.setPassword(appPasswordConfig.bCryptPasswordEncoder().encode(request.password()));
-        newUser.setRole(Roles.valueOf(request.roles()));   //Roles.ADMIN,// dynamisk lösning
+        newUser.setRole(Roles.USER);   //Roles.ADMIN,// dynamisk lösning
         newUser.setAccountNonExpired(true); //newUser.isAccountNonExpired()
         newUser.setAccountNonLocked(true); // newUser.isAccountNonLocked()
         newUser.setAccountEnabled(true); // newUser.isEnabled()
@@ -45,16 +50,4 @@ public class AuthenticationService {
 
 }
 
-    /* registrera ny användare
-        UserEntity userEntity = new UserEntity(
-                request.username(),
-                appPasswordConfig.bCryptPasswordEncoder().encode(request.password()),
-                newUser.getRole(),   //Roles.ADMIN,// dynamisk lösning
-                newUser.isAccountNonExpired(),
-                newUser.isAccountNonLocked(),
-                newUser.isEnabled(),
-                newUser.isCredentialsNonExpired()
-        );
-
-     */
 

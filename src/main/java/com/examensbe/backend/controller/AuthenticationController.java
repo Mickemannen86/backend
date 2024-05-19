@@ -3,6 +3,7 @@ package com.examensbe.backend.controller;
 
 import com.examensbe.backend.Jwt.JwtAuthenticationResponse;
 import com.examensbe.backend.Jwt.JwtTokenGenerator;
+import com.examensbe.backend.exceptions.UserAlreadyExistException;
 import com.examensbe.backend.models.user.*;
 import com.examensbe.backend.services.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ public class AuthenticationController {
     private final JwtTokenGenerator jwtTokenGenerator;
     private final AuthenticationManager authenticationManager;
     private final AuthenticationService service;
+
+    public UserAlreadyExistException userAlreadyExistsException;
 
 
     @Autowired
@@ -64,7 +67,7 @@ public class AuthenticationController {
         );
 
         // Generate JWT token using the authenticated Authentication object
-        String token = jwtTokenGenerator.generateToken(authentication);
+        String token = jwtTokenGenerator.generateToken(authentication, loginRequest.username());
 
         // Return the token in the response
         return ResponseEntity.ok(new JwtAuthenticationResponse(token));
@@ -73,9 +76,23 @@ public class AuthenticationController {
     @PostMapping("/register") // localhost:8080/auth/register
     public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
         //DTO ResReq siginRequest aka ResReQ response = new ResReq();´outUsers = UserEntity
+        try {
 
         UserEntity newUser = service.register(request);
 
+        System.out.println("Ny användare: " + newUser.getUsername() +
+                        "\n" + newUser.getPassword() +
+                        "\n" + newUser.getRole() +
+                        "\n" + newUser.isAccountNonExpired() +
+                        "\n" + newUser.isCredentialsNonExpired() +
+                        "\n" + newUser.isAccountNonLocked() +
+                        "\n" + newUser.isEnabled() +
+                        "\n" + newUser.getAuthorities()
+                );
+
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+        } catch (UserAlreadyExistException e) {
+            return new ResponseEntity<>("Användaren finns redan", HttpStatus.CONFLICT);
+        }
     }
 }

@@ -117,18 +117,6 @@ public class theApp {
         if (cheapestGasStation.isPresent()) {
             GasStation cheapestStation = cheapestGasStation.get();
             return cheapestStation;
-            /*return "\n-- Cheapest Gas Station --" +
-                    "\nGas Station: " + cheapestStation.getGasStation() +
-                    "\nFuel: " + cheapestStation.getFuel() +
-                    "\nPrice: " + cheapestStation.getPrice() +
-                    "\nAddress: " + cheapestStation.getAddress() +
-                    "\nStreet Number :" + cheapestStation.getStreetNr() +
-                    "\nPostal Code: " + cheapestStation.getPostalCode() +
-                    "\nPostal Town: " + cheapestStation.getPostalTown() +
-                    "\nSublocality: " + cheapestStation.getSublocality() +
-                    "\n--------------------------";
-
-             */
         } else {
             // If no gas station is found, return a message indicating so
             System.out.println("No gas station found.");
@@ -162,30 +150,5 @@ public class theApp {
         System.out.println("Slutresultat Check: " + selectedGasStation);
         return selectedGasStation;
     }
-
-    // Hämta lat long object (frontend)                                                                                 -- 1.) klart!
-
-
-    // sätt in lat long värden i URL för geCoding reverse                                                               -- 2.) klart!
-
-
-    // hämta geCoding reverse response & ta ut address värde postal_town som tex Tyresö baserat på lat/lng              -- 3.) klart
-
-
-    // sätt in address värde postal_town som tex Tyresö i selectGasStationWithLowestPrice()
-    // och ta ut lista med bensinstationer(gasStations mm.) från fakeStations.json response payloaden                   -- 4.) klart
-
-
-    // ta ut station baserat på lägst pris                                                                              -- 5.) klart
-
-
-    // Returnera Station, adress & bränsle/pris till gasStationController som i sin tur                                 -- 6.)
-    // skickar datan tillbaka till frontend
-
-
-
-// klasser som behandlar inkommen data                                                                                  -- 7.)
-
-
 
 }
