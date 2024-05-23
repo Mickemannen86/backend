@@ -78,5 +78,15 @@
     "postalCode":19637,
     "postalTown":"Kungsängen",
     "sublocality":"Kungsängen"
+  },
+  {
+    "gasStation":"Okq8",
+    "fuel":"95 Blyfri",
+    "price":"18,49 kr",
+    "address":"Liljeholmstorget",
+    "streetNr":1,
+    "postalCode":11763,
+    "postalTown":"Stockholm",
+    "sublocality":"Hägersten-Liljeholmen"
   }
 ]
