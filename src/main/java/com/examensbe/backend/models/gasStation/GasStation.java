@@ -92,15 +92,14 @@ public class GasStation {
     // toString method for debugging
     @Override
     public String toString() {
-        return "GasStation{" +
-                "\ngasStation='" + gasStation + '\'' +
-                ", fuel='" + fuel + '\'' +
-                ", price='" + price + '\'' +
-                ", address='" + address + '\'' +
+        return "\ngasStation=" + gasStation +
+                ", fuel=" + fuel +
+                ", price=" + price +
+                ", address=" + address +
                 ", streetNr=" + streetNr +
                 ", postalCode=" + postalCode +
-                ", postalTown='" + postalTown + '\'' +
-                ", sublocality='" + sublocality + '\'' +
-                '}';
+                ", postalTown=" + postalTown +
+                ", sublocality=" + sublocality
+                ;
     }
 }

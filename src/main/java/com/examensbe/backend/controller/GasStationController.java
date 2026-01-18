@@ -25,18 +25,15 @@ public class GasStationController {
     @Autowired
     public GasStationController(GasStationService gasStationService) {
         this.gasStationService = gasStationService;
-
     }
 
     @PostMapping("/coordinateData") // localhost:3000/location/coordinateData
     public ResponseEntity<?> getGasStations(@RequestBody LocationRequest locationRequest) throws IOException {
-        // Call the service method to process the location data
+        // Kallar service method för att processa location data
         GasStation response = gasStationService.processLocation(locationRequest.latitude(), locationRequest.longitude());
-
-        System.out.println("\nInnehåller svaret i GasStationController något?" + response + "? <-------------\n");
-
         // Gör en check för att se om response är null
         if (response != null) {
+            // Return svar till Frontend.
             return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
             // Om ingen bensinstation hittades, returnera ett felmeddelande

@@ -18,13 +18,9 @@ public class GasStationService {
     }
 
     public GasStation processLocation(double latitude, double longitude) throws IOException {
-
-        // Call methods from theApp class to process latitude and longitude
+        // Kallar methoden fråm theApp klassen för att processa latitude and longitude
         GasStation selectedGasStation = app.processLatitudeLongitude(latitude, longitude);
-
-        // Så här långt får jag med mig svaret till Service!
-        System.out.println("\nInnehåller svaret i GasStationService något?: " + selectedGasStation + "\n");
-
+        // Return tillbaka till Controller
         return selectedGasStation;
     }
 }

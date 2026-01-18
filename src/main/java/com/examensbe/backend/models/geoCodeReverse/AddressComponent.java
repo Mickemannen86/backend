@@ -54,4 +54,12 @@ public class AddressComponent {
         this.types = types;
     }
 
+    @Override
+    public String toString() {
+        return "AddressComponent{" +
+                "longName='" + longName + '\'' +
+                ", shortName='" + shortName + '\'' +
+                ", types=" + types +
+                '}';
+    }
 }
