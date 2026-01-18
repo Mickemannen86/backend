@@ -8,8 +8,6 @@ import com.examensbe.backend.models.user.RegisterRequest;
 import com.examensbe.backend.models.user.Roles;
 import com.examensbe.backend.models.user.UserEntity;
 import com.examensbe.backend.repositories.UserRepository;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 @Service

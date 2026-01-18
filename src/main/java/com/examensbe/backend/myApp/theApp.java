@@ -25,10 +25,12 @@ public class theApp {
         this.YOUR_API_KEY= apiKey;
         this.objectMapper=objectMapper;
     }
+
     // Hämta lat long object för check om vi har med oss till theApp (från frontend)
     public void fetchLatLong(double latitude, double longitude) {
         System.out.println("\n1.) myApp tar in koordinaterna: " + latitude + " " + longitude);
     }
+
     // Method för att skapa URL för geocoding reverse
     public String constructGeocodingURL(double latitude, double longitude) {
         String baseURL = "https://maps.googleapis.com/maps/api/geocode/json";
@@ -36,9 +38,8 @@ public class theApp {
         String url = baseURL + "?latlng=" + latitude + "," + longitude + "&key=" + apiKey; // skydda min key i application.properties
         return url;
     }
-    // Method som läser av lat/long för att returnera postal_town
 
-    //* Ny *
+    // Method som läser av lat/long för att returnera postal_town
     public String reverseGeoCoding(String geoCodingURL) {
         try {
             GeoCodeReverse response =
@@ -67,33 +68,7 @@ public class theApp {
             return null;
         }
     }
-    //* Ny Slutar *
 
-    /* gamla
-    public String reverseGeoCoding(String GeoCodingURL) throws IOException {
-        try {
-            // objectMapper.ReadValue för att köra anropet
-            GeoCodeReverse geoCodingResponse = objectMapper.readValue(new URL(GeoCodingURL), GeoCodeReverse.class);
-            // Itererar igenom alla address componenterna
-            for (AddressComponent addressComponent : geoCodingResponse.getResults().get(0).getAddressComponents()) {
-                // Ta ut första postal_town
-                if (addressComponent.getTypes().contains("postal_town")) {
-                    // Returnera postal_town
-                    return addressComponent.getLongName();
-                }
-            }
-            System.out.println("Postal town not found.");
-            return null; // Returnerar null om postal town inte hittas
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error occurred while fetching geocoding data: " + e.getMessage());
-            return null; // Returnerar null om ett fel uppstår
-        }
-    }*/
-
-    // Method frågar fakeStations.json för lista med gas stations
-
-    //* Ny *
     public List<GasStation> queryGasStations(String postalTown) throws IOException {
         if (postalTown == null) {
             return List.of();
@@ -111,56 +86,20 @@ public class theApp {
                                 station.getPostalTown().equalsIgnoreCase(postalTown))
                 .toList();
     }
-    //* Ny Slutar *
-    /* gamla
-    public List<GasStation> queryGasStations(String postal_town) throws IOException {
-        // Ladda in fakeStations.json
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("fakeStations.json");
-        List<GasStation> gasStations = objectMapper.readValue(inputStream, new TypeReference<>() {
-        });
-        // Filtrerar gas stations med matchad postal_town
-        List<GasStation> filteredGasStations = gasStations.stream()
-                .filter(station -> station.getPostalTown() != null && station.getPostalTown().equalsIgnoreCase(postal_town))
-                .collect(Collectors.toList());
-        return filteredGasStations;
-    }
-    */
-
 
     // Method som hämtar gas station med lägst price
-
-    //* Ny Slutar *
     public GasStation selectGasStationWithLowestPrice(List<GasStation> gasStations) {
         return gasStations.stream()
                 .min(Comparator.comparingDouble(station -> parsePrice(station.getPrice())))
                 .orElse(null);
     }
 
-    //* Ny Slutar *
-
-     /* gamla
-    public GasStation selectGasStationWithLowestPrice(List<GasStation> gasStations) throws IOException {
-        // Hitta gas station med lägst price
-        Optional<GasStation> cheapestGasStation = gasStations.stream()
-                .min(Comparator.comparingDouble(station -> parsePrice(station.getPrice())));
-
-        // If a cheapest gas station is found, return its details
-        if (cheapestGasStation.isPresent()) {
-            GasStation cheapestStation = cheapestGasStation.get();
-            return cheapestStation;
-        } else {
-            // If no gas station is found, return a message indicating so
-            System.out.println("No gas station found.");
-            return null;
-        }
-    }
-
-    */
     // Hjälp method som parse price string to double
     private double parsePrice(String price) {
         // Remove non-numeric characters, replace comma with dot, and parse to double
         return Double.parseDouble(price.replaceAll("[^\\d.,]", "").replace(",", "."));
     }
+
     // Method to process latitude and longitude to return gasStation with the lowest price
     public GasStation processLatitudeLongitude(double latitude, double longitude) throws IOException {
         // 1. Anropar fetchLatLong för att hantera latitud och longitud från frontend.
