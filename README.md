@@ -51,12 +51,12 @@ This project demonstrates my ability to design and implement a real end-to-end s
 
 ---
 
-🔑 Secrets & Configuration
+## 🔑 Secrets & Configuration
 
 The project uses an application.properties file that is not committed to GitHub.
 
 A template is provided instead:
-
+```
 # Spring Security
 spring.main.banner-mode=off
 
@@ -72,7 +72,7 @@ google.geocoding.api.key=<your_GCP_key>
 # JWT
 jwt.secret=<your_jwt_secret>
 jwt.expiration-ms=3600000
-
+```
 
 This approach keeps sensitive information out of the repository while still allowing easy local setup.
 
