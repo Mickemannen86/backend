@@ -51,6 +51,33 @@ This project demonstrates my ability to design and implement a real end-to-end s
 
 ---
 
+🔑 Secrets & Configuration
+
+The project uses an application.properties file that is not committed to GitHub.
+
+A template is provided instead:
+
+# Spring Security
+spring.main.banner-mode=off
+
+# Database
+spring.jpa.hibernate.ddl-auto=update
+spring.datasource.url=jdbc:postgresql://localhost:5432/<your_database_name>
+spring.datasource.username=<your_username>
+spring.datasource.password=<your_password>
+
+# External API
+google.geocoding.api.key=<your_GCP_key>
+
+# JWT
+jwt.secret=<your_jwt_secret>
+jwt.expiration-ms=3600000
+
+
+This approach keeps sensitive information out of the repository while still allowing easy local setup.
+
+---
+
 ## 🌍 External API Integration
 
 - Google Geocoding API is used to:
